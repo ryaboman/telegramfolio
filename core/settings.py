@@ -5,6 +5,8 @@ from dataclasses import dataclass
 class Bots:
     bot_token: str
     admin_id: int
+    href_apartment_price_prediction: str
+    href_business_card: str
 
 @dataclass
 class Settings:
@@ -18,7 +20,9 @@ def get_settings(path: str):
     return Settings(
         bots=Bots(
             bot_token=env.str('TOKEN'),
-            admin_id=env.int('ADMIN_ID')
+            admin_id=env.int('ADMIN_ID'),
+            href_apartment_price_prediction=env.str('WEB_APP_APARTMENT_PRICE_PREDICTION'),
+            href_business_card=env.str('WEB_APP_BUSINESS_CARD')
         )
     )
 

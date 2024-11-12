@@ -55,7 +55,6 @@ async def get_project_audio_transcription(call: CallbackQuery, state: FSMContext
     await call.message.answer(f'Выберите проект для ознакомления:', reply_markup=select_project)
     await call.answer()
 
-
 async def get_class_text(message: Message, bot: Bot):
     print(message.text)
     if len(message.text) > 300:

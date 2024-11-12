@@ -1,6 +1,6 @@
 from aiogram import Bot, Dispatcher
 from aiogram.types import Message
-from core.handlers.basic import get_start, get_photo, get_help
+from core.handlers.basic import get_start, get_photo, get_help, get_button_price_apartment_prediction
 import asyncio
 import logging
 from core.settings import settings
@@ -40,6 +40,7 @@ async def start():
     dp.callback_query.register(get_project_age_recognition, F.data == 'age_recognition')
     dp.callback_query.register(get_project_digit_recognition, F.data == 'digit_recognition')
     dp.callback_query.register(get_project_audio_transcription, F.data == 'audio_transcription')
+    dp.callback_query.register(get_button_price_apartment_prediction, F.data == 'price_apartment_prediction')
 
     dp.message.register(get_class_text, ~F.text.startswith('/'),
                         StepsViewProjects.TC_WAIT_TEXT)

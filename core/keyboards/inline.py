@@ -1,5 +1,6 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.types.web_app_info import WebAppInfo
+from core.settings import settings
 
 select_project = InlineKeyboardMarkup(inline_keyboard=[
     [
@@ -28,6 +29,12 @@ select_project = InlineKeyboardMarkup(inline_keyboard=[
     ],
     [
         InlineKeyboardButton(
+            text='Рассчитать стоимость квартиры',
+            callback_data='price_apartment_prediction'
+        )
+    ],
+    [
+        InlineKeyboardButton(
             text='« Назад',
             callback_data='backward'
         )
@@ -38,7 +45,7 @@ business_card = InlineKeyboardMarkup(inline_keyboard=[
     [
         InlineKeyboardButton(
             text='Сайт-визитка Алексея Рябова',
-            web_app=WebAppInfo(url='https://aleksey-ryabov.ru')
+            web_app=WebAppInfo(url=settings.bots.href_business_card)
         )
     ],
     [
