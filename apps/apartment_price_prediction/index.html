@@ -1,49 +1,201 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-
+	<script src="https://telegram.org/js/telegram-web-app.js"></script>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="main.js"></script>
 
-    <title>Предсказание стоимости квартиры</title>
+
+    <title>Рыночная стоимость квартиры</title>
 </head>
 <body>
-    <p>Для предсказания рыночной цены квартиры задайте парметры квартиры и нажмите кнопку "Стоимость"</p>
+    <p>Для определения рыночной стоимости квартиры задайте ее парметры и нажмите кнопку "Рассчитать"</p>
     <form id="prediction">
         <div class="mb-3">
-          <label for="formControlInput1" class="form-label">Площадь квартиры, кв. м.</label>
-          <input type="email" class="form-control" id="formControlInput1" placeholder="43">
+          <label for="total_area" class="form-label">Площадь квартиры, кв. м.</label>
+          <input type="text" class="form-control" id="total_area" placeholder="Например: 43" required>
+        </div>
+		<div class="mb-3">
+          <label for="living_area" class="form-label">Жилая площадь, кв. м.</label>
+          <input type="text" class="form-control" id="living_area" placeholder="Например: 20" required>
+        </div>
+		<div class="mb-3">
+          <label for="kitchen_area" class="form-label">Площадь кухни, кв. м.</label>
+          <input type="text" class="form-control" id="kitchen_area" placeholder="Например: 6" required>
         </div>
         <div class="mb-3">
-          <label for="formControlInput2" class="form-label">Количество комнат</label>
-          <input type="email" class="form-control" id="formControlInput2" placeholder="2">
+          <label for="rooms" class="form-label">Количество комнат</label>
+          <select class="form-select" id="rooms">
+			<option value="0">Студия</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+		  </select>
+        </div>
+		<div class="mb-3">
+          <label for="balcony" class="form-label">Балкон</label>
+          <select class="form-select" id="balcony">
+			<option value="0">Нет</option>
+			<option value="1">Да</option>
+		  </select>
+        </div>
+		<div class="mb-3">
+          <label for="logie" class="form-label">Лоджия</label>
+          <select class="form-select" id="logie">
+			<option value="0">Нет</option>
+			<option value="1">Да</option>
+		  </select>
+        </div>
+		<div class="mb-3">
+          <label for="bathroom" class="form-label">Количество санузлов</label>
+          <select class="form-select" id="bathroom">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+		  </select>
+        </div>
+		<div class="mb-3">
+          <label for="renovation" class="form-label">Ремонт</label>
+          <select class="form-select" id="renovation">
+			<option value="1">Без ремонта</option>
+			<option value="2">Косметический</option>
+			<option value="3">Евроремонт</option>
+			<option value="4">Дизайнерский</option>
+		  </select>
+        </div>
+		<div class="mb-3">
+          <label for="gas_supply" class="form-label">Газоснабжение</label>
+          <select class="form-select" id="gas_supply">
+			<option value="0">Нет</option>
+			<option value="1">Да</option>
+		  </select>
+        </div>
+		<div class="mb-3">
+          <label for="floor" class="form-label">Этаж</label>
+          <input type="text" class="form-control" id="floor" placeholder="Например: 2" required>
+        </div>
+		<div class="mb-3">
+          <label for="floors_total" class="form-label">Этажность дома</label>
+          <input type="text" class="form-control" id="floors_total" placeholder="Например: 5" required>
+        </div>
+		<div class="mb-3">
+          <label for="passenger_elevator" class="form-label">Пассажирский лифт</label>
+          <select class="form-select" id="passenger_elevator">
+			<option value="0">Нет</option>
+			<option value="1">Да</option>
+		  </select>
+        </div>
+		<div class="mb-3">
+          <label for="service_elevator" class="form-label">Грузовой лифт</label>
+          <select class="form-select" id="service_elevator">
+			<option value="0">Нет</option>
+			<option value="1">Да</option>
+		  </select>
         </div>
         <div class="mb-3">
-          <label for="formControlInput3" class="form-label">Год постройки</label>
-          <input type="email" class="form-control" id="formControlInput3" placeholder="1985">
+          <label for="year" class="form-label">Год постройки дома</label>
+          <input type="text" class="form-control" id="year" placeholder="Например: 1985" required>
+        </div>
+		<div class="mb-3">
+          <label for="type_of_building" class="form-label">Тип дома</label>
+          <select class="form-select" id="type_of_building">
+			<option value="1">Кирпичный</option>
+			<option value="2">Панельный</option>
+			<option value="3">Монолитный</option>
+			<option value="4">Блочный</option>
+			<option value="5">Монолитно-кирпичный</option>
+			<option value="6">Нет информации</option>
+		  </select>
         </div>
         <div class="mb-3">
-          <label for="formControlInput4" class="form-label">Площадь кухни, кв. м.</label>
-          <input type="email" class="form-control" id="formControlInput4" placeholder="6">
-        </div>
-        <div class="mb-3">
-          <label for="formControlInput5" class="form-label">Этаж квартиры</label>
-          <input type="email" class="form-control" id="formControlInput5" placeholder="4">
-        </div>
-        <div class="mb-3">
-          <label for="formControlInput6" class="form-label">Этажность дома</label>
-          <input type="email" class="form-control" id="formControlInput6" placeholder="9">
+          <label for="region" class="form-label">Район</label>
+          <select class="form-select" id="region">
+			<option value="1">Автозаводский</option>
+			<option value="2">Советский</option>
+			<option value="3">Сормовский</option>
+			<option value="4">Московский</option>
+			<option value="5">Нижегородский</option>
+			<option value="6">Ленинский</option>
+			<option value="7">Канавинский</option>
+			<option value="8">Приокский</option>
+		  </select>
         </div>
 
 
         <div class="d-grid gap-2 col-6 mx-auto">
-          <button id="btn" class="btn btn-primary" type="button">Стоимость</button>
+          <button id="btn" class="btn btn-primary" type="submit" disabled>Рассчитать</button>
         </div>
 
     </form>
 
 </body>
+<script>
+    //получаем объект webapp телеграма 
+	let tg = window.Telegram.WebApp;
+	
+	//расширяем на все окно 
+	tg.expand();  
+
+
+	let formSubmit = document.getElementById("btn");
+	
+	let form = document.getElementById('prediction');
+	form.addEventListener('change', function(){		
+	  //console.log(form.checkValidity());
+	  if (form.checkValidity()) {
+		formSubmit.removeAttribute('disabled');
+	  }
+	});
+
+	formSubmit.addEventListener('click', function(){ 
+		//собераем все данные из формы
+		var data = serializeSelectForm();
+		let jsonString = JSON.stringify(data); 
+		tg.sendData(jsonString);
+	});
+	
+	function serializeSelectForm(){
+
+		var total_area = document.getElementById('total_area').value;
+		var living_area = document.getElementById('living_area').value;
+		var kitchen_area = document.getElementById('kitchen_area').value;
+		var rooms = document.getElementById('rooms').value;
+		var balcony = document.getElementById('balcony').value;
+		var logie = document.getElementById('logie').value;
+		var bathroom = document.getElementById('bathroom').value;
+		var renovation = document.getElementById('renovation').value;
+		var gas_supply = document.getElementById('gas_supply').value;
+		var floor = document.getElementById('floor').value;
+		var floors_total = document.getElementById('floors_total').value;
+		var passenger_elevator = document.getElementById('passenger_elevator').value;
+		var service_elevator = document.getElementById('service_elevator').value;
+		var year = document.getElementById('year').value;
+		var type_of_building = document.getElementById('type_of_building').value;
+		var region = document.getElementById('region').value;
+
+		
+		return {
+				total_area: total_area, 
+				living_area: living_area,
+				kitchen_area: kitchen_area,
+				rooms: rooms,
+				balcony: balcony,
+				logie: logie,
+				bathroom: bathroom,
+				renovation: renovation,
+				gas_supply: gas_supply,
+				floor: floor,
+				floors_total: floors_total,
+				passenger_elevator: passenger_elevator,
+				service_elevator: service_elevator,
+				year: year,
+				type_of_building: type_of_building,
+				region: region
+		};		
+	}
+</script>
+
+
 </html>
